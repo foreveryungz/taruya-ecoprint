@@ -24,6 +24,21 @@
 | D-11 | 2026-10-27 | Halaman detail produk/kegiatan opsional, tidak dibuat di fase 1 | Grid + CTA WA sudah cukup untuk mulai | `content.md` |
 | D-12 | 2026-10-27 | Pengelolaan awal oleh developer; delegasi ke admin beberapa bulan setelah live | Arah pemilik/pengelola | `prd.md`, `deployment.md` |
 
+### Keputusan implementasi T0.1
+
+| ID | Tanggal | Keputusan | Alasan dan alternatif yang ditolak | Sumber |
+|---|---|---|---|---|
+| D-13 | 2026-10-27 | Scaffold minimal, Astro dipatok ke 7.4.2, TypeScript strict, output statis tanpa integrasi | T0.1 menyetujui U-01. Versi diverifikasi melalui npm view astro version; Boutique dan integrasi tambahan ditolak karena di luar scope | T0.1; https://docs.astro.build/en/install-and-setup/ |
+| D-14 | 2026-10-27 | npm dengan package-lock.json; Node 24.22.1 LTS di .nvmrc dan engines >=22.23.4 <25 | Menjawab Q-16. Node awal 22.12.0 di bawah minimum Astro >=22.23.4; Node 26 masih Current saat verifikasi. pnpm ditolak agar satu package manager | T0.1; https://nodejs.org/en/about/previous-releases; https://nodejs.org/dist/index.json |
+| D-15 | 2026-10-27 | @astrojs/check dan typescript sebagai devDependencies untuk astro check | Memeriksa berkas .astro dan TypeScript; tsc saja tidak memeriksa .astro, build saja tidak memeriksa tipe. Formatter dan linter ditunda dari T0.1 | T0.1; https://docs.astro.build/en/guides/typescript/ |
+
+### Keputusan implementasi T0.2
+
+| ID | Tanggal | Keputusan | Alasan dan alternatif yang ditolak | Sumber |
+|---|---|---|---|---|
+| D-16 | 2026-10-27 | Tailwind CSS 4.3.3 dan @tailwindcss/vite 4.3.3 dipasang melalui CLI Astro; token CSS memakai @theme di global.css | Panduan resmi Styles and CSS untuk Astro terpasang 7.4.2 memakai plugin Vite. Integrasi lama @astrojs/tailwind dan konfigurasi Tailwind v3 ditolak karena bukan jalur yang dianjurkan | T0.2 disetujui; https://docs.astro.build/en/guides/styling/#add-tailwind-4; https://tailwindcss.com/docs/theme |
+| D-17 | 2026-10-27 | Palet usulan design.md dipusatkan di global.css; halaman uji sementara memuat contoh ID/EN melalui t() lokal | Memverifikasi token tanpa mendahului komponen, font, routing i18n, atau halaman produksi. Nilai warna/spasi di halaman dan pemasangan font ditolak karena di luar scope; halaman diganti di T3.2 | T0.2 disetujui; design.md §2–4; tech-spec.md §8 |
+
 ## 2. Usulan (menunggu persetujuan)
 
 | ID | Usulan | Alasan | Keputusan di |

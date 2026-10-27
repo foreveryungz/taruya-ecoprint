@@ -1,0 +1,99 @@
+﻿---
+import '../styles/global.css';
+
+// TEMP: diganti di T3.2
+// Temporary bilingual specimen; shared i18n follows separately.
+const ui = {
+  id: {
+    title: 'Uji token desain',
+    language: 'Bahasa Indonesia',
+    skip: 'Lewati ke konten utama',
+    palette: 'Palet usulan',
+    note: 'Warna ini adalah usulan awal dan dapat diubah melalui token.',
+    typography: 'Skala tipografi',
+    sample: 'Contoh teks untuk menguji ukuran dan keterbacaan.',
+    link: 'Lihat skala tipografi',
+  },
+  en: {
+    title: 'Design token preview',
+    language: 'English',
+    skip: 'Skip to main content',
+    palette: 'Proposed palette',
+    note: 'These colors are an initial proposal and can be changed through tokens.',
+    typography: 'Typography scale',
+    sample: 'Sample text to check size and readability.',
+    link: 'View the typography scale',
+  },
+} as const;
+type Lang = keyof typeof ui;
+const t = (lang: Lang, key: keyof typeof ui.id) => ui[lang][key];
+const languages: Lang[] = ['id', 'en'];
+const palette = [
+  { name: 'bg', class: 'bg-bg' },
+  { name: 'surface', class: 'bg-surface' },
+  { name: 'ink', class: 'bg-ink' },
+  { name: 'muted', class: 'bg-muted' },
+  { name: 'border', class: 'bg-border' },
+  { name: 'primary', class: 'bg-primary' },
+  { name: 'primary-ink', class: 'bg-primary-ink' },
+  { name: 'accent', class: 'bg-accent' },
+  { name: 'accent-strong', class: 'bg-accent-strong' },
+];
+const scale = [
+  { name: 'Display', class: 'text-display' },
+  { name: 'H1', class: 'text-h1' },
+  { name: 'H2', class: 'text-h2' },
+  { name: 'H3', class: 'text-h3' },
+  { name: 'Body', class: 'text-body' },
+  { name: 'Small', class: 'text-small' },
+];
+---
+
+<!-- TEMP: diganti di T3.2 -->
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <title>{t('id', 'title')} / {t('en', 'title')}</title>
+  </head>
+  <body>
+    <a href="#main" class="mx-gutter inline-flex min-h-target flex-wrap items-center gap-2">
+      {t('id', 'skip')} / <span lang="en">{t('en', 'skip')}</span>
+    </a>
+    <main id="main" tabindex="-1" class="mx-auto max-w-page px-gutter py-section">
+      <h1 class="text-h1 font-semibold">
+        {t('id', 'title')} / <span lang="en">{t('en', 'title')}</span>
+      </h1>
+      {languages.map((lang) => (
+        <section lang={lang} aria-labelledby={`language-${lang}`} class="mt-section space-y-8">
+          <h2 id={`language-${lang}`} class="text-h2 font-semibold">{t(lang, 'language')}</h2>
+          <section aria-labelledby={`palette-${lang}`} class="space-y-4">
+            <h3 id={`palette-${lang}`} class="text-h3 font-semibold">{t(lang, 'palette')}</h3>
+            <p class="text-muted">{t(lang, 'note')}</p>
+            <ul class="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {palette.map((color) => (
+                <li class="overflow-hidden rounded-sm border border-border bg-surface">
+                  <div aria-hidden="true" class:list={['h-24', color.class]} />
+                  <p class="p-4 text-small text-ink"><code>--color-{color.name}</code></p>
+                </li>
+              ))}
+            </ul>
+            <a href={`#typography-${lang}`} class="inline-flex min-h-target items-center rounded-sm bg-primary px-4 py-2 text-primary-ink hover:text-primary-ink">
+              {t(lang, 'link')}
+            </a>
+          </section>
+          <section aria-labelledby={`typography-${lang}`} class="space-y-4">
+            <h3 id={`typography-${lang}`} class="text-h3 font-semibold">{t(lang, 'typography')}</h3>
+            {scale.map((level) => (
+              <div class="space-y-2 border-t border-border py-4">
+                <p class="text-small text-muted"><code>{level.name} / {level.class}</code></p>
+                <p class={level.class}>{t(lang, 'sample')}</p>
+              </div>
+            ))}
+          </section>
+        </section>
+      ))}
+    </main>
+  </body>
+</html>
