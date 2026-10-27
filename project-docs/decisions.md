@@ -39,6 +39,20 @@
 | D-16 | 2026-10-27 | Tailwind CSS 4.3.3 dan @tailwindcss/vite 4.3.3 dipasang melalui CLI Astro; token CSS memakai @theme di global.css | Panduan resmi Styles and CSS untuk Astro terpasang 7.4.2 memakai plugin Vite. Integrasi lama @astrojs/tailwind dan konfigurasi Tailwind v3 ditolak karena bukan jalur yang dianjurkan | T0.2 disetujui; https://docs.astro.build/en/guides/styling/#add-tailwind-4; https://tailwindcss.com/docs/theme |
 | D-17 | 2026-10-27 | Palet usulan design.md dipusatkan di global.css; halaman uji sementara memuat contoh ID/EN melalui t() lokal | Memverifikasi token tanpa mendahului komponen, font, routing i18n, atau halaman produksi. Nilai warna/spasi di halaman dan pemasangan font ditolak karena di luar scope; halaman diganti di T3.2 | T0.2 disetujui; design.md §2–4; tech-spec.md §8 |
 
+### Keputusan implementasi T0.3
+
+| ID | Tanggal | Keputusan | Alasan dan alternatif yang ditolak | Sumber |
+|---|---|---|---|---|
+| D-18 | 2026-10-27 | Self-host melalui @fontsource/fraunces dan @fontsource/inter dengan versi tepat di package.json/lockfile; Fraunces 600 untuk judul, Inter 400/600 untuk isi/UI, normal Latin, font-display swap | Fonts API Astro 7.4.2 tersedia, tetapi memerlukan komponen Font di head halaman/layout; ditolak untuk T0.3 karena halaman dan komponen di luar scope. Import CSS Fontsource melalui global.css menghasilkan aset lokal lewat Vite tanpa CDN saat runtime. Rentang variable font penuh ditolak karena hanya perlu tiga face pada dua bobot. Keluarga masih usulan awal (Q-11) | T0.3; https://docs.astro.build/en/guides/fonts/; https://fontsource.org/docs/getting-started/install |
+| D-19 | 2026-10-27 | Token font-sans/font-serif memakai fallback lokal Arial/Georgia dengan size-adjust dan override metrik vertikal; skala design.md tetap | Metrik dihitung dari font Latin terpasang dan Arial/Arial Bold/Georgia Bold Windows memakai @capsizecss/unpack yang sudah transitif dari Astro (tanpa dependensi baru). size-adjust adalah rasio lebar rata-rata ternormalisasi; metrik vertikal target dibagi rasio ini. Fallback tanpa penyesuaian ditolak untuk mengurangi CLS. Sistem tanpa Arial/Georgia memakai system-ui/serif dan perlu uji perangkat nyata; hitung ulang bila font/versi berubah | T0.3; design.md §3; quality.md AC-41/43/44 |
+
+### Keputusan implementasi T0.4
+
+| ID | Tanggal | Keputusan | Alasan dan alternatif yang ditolak | Sumber |
+|---|---|---|---|---|
+| D-20 | 2026-10-27 | Prettier dan prettier-plugin-astro sebagai devDependencies dengan versi tepat di package.json/lockfile; skrip format dan format:check | Format kode konsisten termasuk berkas Astro; Prettier tanpa plugin tidak mendukung Astro. Format manual ditolak karena sulit dijaga konsisten; ESLint di luar scope. Markdown dikecualikan agar formatter tidak merombak dokumen proyek | T0.4; https://prettier.io/docs/install; https://github.com/withastro/prettier-plugin-astro |
+| D-21 | 2026-10-27 | Line ending LF melalui Prettier dan .gitattributes; CI GitHub menjalankan npm ci, format:check, check, dan build pada PR serta push ke main, memakai Node dari .nvmrc | Pengguna mengonfirmasi GitHub. LF mencegah perbedaan lintas OS; line ending bawaan OS dan versi Node CI terpisah ditolak karena berpotensi berbeda dari lokal | T0.4; deployment.md §3–4; https://github.com/actions/setup-node |
+
 ## 2. Usulan (menunggu persetujuan)
 
 | ID | Usulan | Alasan | Keputusan di |

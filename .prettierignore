@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.astro/
+package-lock.json
+# Documentation is maintained separately from code formatting.
+**/*.md

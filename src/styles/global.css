@@ -1,7 +1,55 @@
 ﻿@import "tailwindcss";
 
+@import "@fontsource/fraunces/latin-600.css";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-600.css";
+
+/* Measured from packaged Latin fonts and Windows Arial/Georgia using Capsize.
+   size-adjust matches average width; vertical metrics are divided by that
+   ratio. Recalculate when changing fonts or package versions. */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  size-adjust: 107.1194%;
+  ascent-override: 90.4365%;
+  descent-override: 22.518%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial Bold");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  size-adjust: 101.5259%;
+  ascent-override: 95.419%;
+  descent-override: 23.7586%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Georgia Bold");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  size-adjust: 93.4328%;
+  ascent-override: 104.6742%;
+  descent-override: 27.2924%;
+  line-gap-override: 0%;
+}
+
 /* Proposed palette: change these tokens when brand colors are confirmed. */
 @theme static {
+  --font-sans: "Inter", "Inter Fallback", system-ui, sans-serif;
+  --font-serif: "Fraunces", "Fraunces Fallback", Georgia, serif;
+  --font-weight-*: initial;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
   --color-*: initial;
   --color-bg: #f7f3ec;
   --color-surface: #ffffff;
@@ -46,10 +94,26 @@
 
 @layer base {
   body {
+    font-family: var(--font-sans);
     background-color: var(--color-bg);
     color: var(--color-ink);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  b,
+  strong {
+    font-weight: var(--font-weight-semibold);
   }
 
   a {
@@ -65,6 +129,17 @@
   :focus {
     outline: var(--focus-width) solid var(--color-ink);
     outline-offset: var(--focus-offset);
+  }
+}
+
+/* Also apply the display family to typography scale specimens. */
+@layer utilities {
+  .text-display,
+  .text-h1,
+  .text-h2,
+  .text-h3 {
+    font-family: var(--font-serif);
+    font-weight: var(--font-weight-semibold);
   }
 }
 

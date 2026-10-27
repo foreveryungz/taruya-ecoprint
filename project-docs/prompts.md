@@ -91,6 +91,7 @@ Tugas T0.4: tooling.
 - Tambahkan entri di `project-docs/decisions.md` untuk dependensi baru.
 Di luar scope: ESLint (jangan dipasang).
 Selesai bila: `format:check`, `check`, dan `build` lolos (AC-60).
+- Seragamkan line ending: atur `endOfLine: "lf"` di konfigurasi Prettier dan buat `.gitattributes` berisi `* text=auto eol=lf`. Setelah itu normalisasi file yang sudah ada tanpa mengubah isinya (`git add --renormalize .`) dan laporkan file mana yang berubah.
 
 Kerjakan langsung, lalu jalankan `npm run check` dan `npm run build`, dan laporkan hasilnya. Jangan commit.
 ```
